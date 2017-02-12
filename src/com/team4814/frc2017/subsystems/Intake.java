@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem
 {
-
 	protected Victor mainMotor;
 
 	public Intake()

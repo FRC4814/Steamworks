@@ -28,7 +28,8 @@ public class ShooterToggleCommand extends Command
 		if (toggle)
 		{
 			Robot.shooter.setSpeed(1.0);
-		} else
+		}
+		else
 		{
 			Robot.shooter.setSpeed(0.0);
 		}

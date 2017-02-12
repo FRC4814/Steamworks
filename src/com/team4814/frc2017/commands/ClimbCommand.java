@@ -29,7 +29,7 @@ public class ClimbCommand extends Command
 		
 		InputManager.driverController.setRumble(RumbleType.kRightRumble, speed);
 		
-		Robot.climber.climb(speed);
+		Robot.climber.setSpeed(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -41,7 +41,7 @@ public class ClimbCommand extends Command
 	// Called once after isFinished returns true
 	protected void end()
 	{
-		Robot.climber.climb(0.0);
+		Robot.climber.setSpeed(0.0);
 	}
 
 	// Called when another command which requires one or more of the same

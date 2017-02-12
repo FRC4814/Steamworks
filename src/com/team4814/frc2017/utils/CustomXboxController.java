@@ -4,11 +4,16 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class CustomXboxController extends XboxController
 {
-	protected double deadzone = 0.15;
+	protected double deadzone = 0.0;
 
 	public CustomXboxController(int port)
 	{
 		super(port);
+	}
+	
+	public void setDeadzone(double deadzone)
+	{
+		this.deadzone = deadzone;
 	}
 
 	@Override

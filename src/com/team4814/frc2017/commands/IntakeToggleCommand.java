@@ -28,7 +28,8 @@ public class IntakeToggleCommand extends Command
 		if (toggle)
 		{
 			Robot.intake.setSpeed(1.0);
-		} else
+		}
+		else
 		{
 			Robot.intake.setSpeed(0.0);
 		}

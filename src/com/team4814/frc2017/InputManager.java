@@ -17,9 +17,8 @@ public class InputManager
 
 	public InputManager()
 	{
-		// Button climbButton = new JoystickButton(driverController,
-		// XboxButton.kButtonA.getValue());
-		// climbButton.whileHeld(new ClimbCommand(1.0f));
+		driverController.setDeadzone(0.13);
+		
 		Button shooterButton = new JoystickButton(driverController, XboxButton.kButtonA.getValue());
 		shooterButton.whenActive(new ShooterToggleCommand(true));
 		shooterButton.whenInactive(new ShooterToggleCommand(false));

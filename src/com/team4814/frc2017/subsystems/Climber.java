@@ -23,7 +23,7 @@ public class Climber extends Subsystem
 		setDefaultCommand(new ClimbCommand());
 	}
 	
-	public void climb(double speed)
+	public void setSpeed(double speed)
 	{
 		mainMotor.set(speed);
 	}
