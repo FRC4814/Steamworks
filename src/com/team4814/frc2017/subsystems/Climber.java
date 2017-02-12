@@ -5,6 +5,7 @@ import com.team4814.frc2017.commands.ClimbCommand;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -26,5 +27,7 @@ public class Climber extends Subsystem
 	public void setSpeed(double speed)
 	{
 		mainMotor.set(speed);
+		
+		SmartDashboard.putNumber("Climber Speed", speed);
 	}
 }

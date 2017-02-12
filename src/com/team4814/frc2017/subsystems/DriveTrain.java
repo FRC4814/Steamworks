@@ -5,6 +5,7 @@ import com.team4814.frc2017.commands.HaloDriveCommand;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -18,11 +19,16 @@ public class DriveTrain extends Subsystem
 	{
 		leftMotors = new Victor[RobotMap.LEFT_MOTORS.length];
 		for (int i = 0; i < leftMotors.length; i++)
+		{
 			leftMotors[i] = new Victor(RobotMap.LEFT_MOTORS[i]);
+		}
 		
 		rightMotors = new Victor[RobotMap.RIGHT_MOTORS.length];
 		for (int i = 0; i < rightMotors.length; i++)
+		{
 			rightMotors[i] = new Victor(RobotMap.RIGHT_MOTORS[i]);
+			rightMotors[i].setInverted(true);
+		}
 	}
 
 	public void initDefaultCommand()
@@ -30,21 +36,25 @@ public class DriveTrain extends Subsystem
 		setDefaultCommand(new HaloDriveCommand());
 	}
 	
-	public void drive(double leftPower, double rightPower)
+	public void drive(double leftSpeed, double rightSpeed)
 	{
-		setLeftPower(leftPower);
-		setRightPower(rightPower);
+		setLeftSpeed(leftSpeed);
+		setRightSpeed(rightSpeed);
 	}
 	
-	protected void setLeftPower(double power)
+	protected void setLeftSpeed(double speed)
 	{
 		for (int i = 0; i < leftMotors.length; i++)
-			leftMotors[i].set(power);
+			leftMotors[i].set(speed);
+		
+		SmartDashboard.putNumber("Drive Left Speed", speed);
 	}
 	
-	protected void setRightPower(double power)
+	protected void setRightSpeed(double speed)
 	{
 		for (int i = 0; i < rightMotors.length; i++)
-			rightMotors[i].set(-power);
+			rightMotors[i].set(speed);
+		
+		SmartDashboard.putNumber("Drive Right Speed", speed);
 	}
 }
