@@ -4,6 +4,7 @@ import com.team4814.frc2017.RobotMap;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -27,5 +28,7 @@ public class Intake extends Subsystem
 	public void setSpeed(double speed)
 	{
 		mainMotor.setSpeed(speed);
+		
+		SmartDashboard.putNumber("Intake Speed", speed);
 	}
 }
