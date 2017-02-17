@@ -17,4 +17,8 @@ public class RobotMap
 	
 	// USB
 	public static final int DRIVER_CONTROLLER = 1;
+	
+	// DIO
+	public static final int[] LEFT_MOTOR_ENCODERS = { 0, 1 };
+	public static final int[] RIGHT_MOTOR_ENCODERS = { 2, 3 };
 }

@@ -24,7 +24,7 @@ public class InputManager
 		shooterButton.whenInactive(new ShooterToggleCommand(false));
 
 		Button intakeButton = new JoystickButton(driverController, XboxButton.kButtonB.getValue());
-		intakeButton.whenActive(new ShooterToggleCommand(true));
-		intakeButton.whenInactive(new ShooterToggleCommand(false));
+		intakeButton.whenActive(new IntakeToggleCommand(true));
+		intakeButton.whenInactive(new IntakeToggleCommand(false));
 	}
 }
