@@ -20,8 +20,7 @@ public class InputManager
 		driverController.setDeadzone(0.13);
 		
 		Button shooterButton = new JoystickButton(driverController, XboxButton.kButtonA.getValue());
-		shooterButton.whenActive(new ShooterToggleCommand(true));
-		shooterButton.whenInactive(new ShooterToggleCommand(false));
+		shooterButton.toggleWhenPressed(new ShooterToggleCommand(true));
 
 		Button intakeButton = new JoystickButton(driverController, XboxButton.kButtonB.getValue());
 		intakeButton.whenActive(new IntakeToggleCommand(true));

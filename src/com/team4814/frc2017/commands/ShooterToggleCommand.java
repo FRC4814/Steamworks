@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShooterToggleCommand extends Command
 {
 	private boolean toggle;
-	private DashboardVariable<Double> shooterSpeed = new DashboardVariable<Double>("Shooter Speed", 1.0);
+	private static DashboardVariable<Double> shooterSpeed = new DashboardVariable<Double>("Shooter Speed", 1.0);
 
 	public ShooterToggleCommand(boolean toggle)
 	{
@@ -46,11 +46,13 @@ public class ShooterToggleCommand extends Command
 	// Called once after isFinished returns true
 	protected void end()
 	{
+		Robot.shooter.setSpeed(0.0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted()
 	{
+		end();
 	}
 }

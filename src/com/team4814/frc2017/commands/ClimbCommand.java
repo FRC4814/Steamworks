@@ -25,9 +25,13 @@ public class ClimbCommand extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		double speed = InputManager.driverController.getTriggerAxis(Hand.kRight);
+		double rightSpeed = InputManager.driverController.getTriggerAxis(Hand.kRight);
+		//double leftSpeed = InputManager.driverController.getTriggerAxis(Hand.kLeft);
 		
-		InputManager.driverController.setRumble(RumbleType.kRightRumble, speed);
+		InputManager.driverController.setRumble(RumbleType.kRightRumble, rightSpeed);
+		//InputManager.driverController.setRumble(RumbleType.kLeftRumble, leftSpeed);
+		
+		double speed = rightSpeed;// - leftSpeed;
 		
 		Robot.climber.setSpeed(speed);
 	}

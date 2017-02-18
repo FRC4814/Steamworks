@@ -4,6 +4,7 @@ import com.team4814.frc2017.RobotMap;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -16,6 +17,9 @@ public class Shooter extends Subsystem
 	public Shooter()
 	{
 		mainMotor = new Victor(RobotMap.SHOOTER_MOTOR);
+		mainMotor.setInverted(true);
+		
+		LiveWindow.addSensor(this.getName(), "Shooter Motor", mainMotor);
 	}
 
 	public void initDefaultCommand()
@@ -26,7 +30,5 @@ public class Shooter extends Subsystem
 	public void setSpeed(double speed)
 	{
 		mainMotor.set(speed);
-		
-		SmartDashboard.putNumber("Shooter Speed", speed);
 	}
 }

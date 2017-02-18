@@ -38,7 +38,7 @@ public class DriveTrain extends Subsystem
 		
 		leftEncoder = new Encoder(RobotMap.LEFT_MOTOR_ENCODERS[0], RobotMap.LEFT_MOTOR_ENCODERS[1], false, EncodingType.k4X);
 		rightEncoder = new Encoder(RobotMap.RIGHT_MOTOR_ENCODERS[0], RobotMap.RIGHT_MOTOR_ENCODERS[1], true, EncodingType.k4X);
-	
+		
 		LiveWindow.addSensor(this.getName(), "Left Encoder", leftEncoder);
 		LiveWindow.addSensor(this.getName(), "Right Encoder", rightEncoder);
 	}
@@ -46,6 +46,12 @@ public class DriveTrain extends Subsystem
 	public void initDefaultCommand()
 	{
 		setDefaultCommand(new HaloDriveCommand());
+	}
+	
+	public void resetEncoders()
+	{
+		leftEncoder.reset();
+		rightEncoder.reset();
 	}
 	
 	public void drive(double leftSpeed, double rightSpeed)
