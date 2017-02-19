@@ -16,18 +16,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem
 {
+	public static final DashboardVariable<Double> leftDPP = new DashboardVariable<>("LeftDPP", 0.197);
+	public static final DashboardVariable<Double> rightDPP = new DashboardVariable<>("RightDPP", 0.192);
+
 	protected VictorSP[] leftMotors;
 	protected VictorSP[] rightMotors;
 
 	public Encoder leftEncoder;
 	public Encoder rightEncoder;
-	
-	public static DashboardVariable<Double> leftDPP;
-	public static DashboardVariable<Double> rightDPP;
-	
 
 	public DriveTrain()
-	{		
+	{
 		leftMotors = new VictorSP[RobotMap.LEFT_MOTORS.length];
 		for (int i = 0; i < leftMotors.length; i++)
 		{
@@ -57,9 +56,6 @@ public class DriveTrain extends Subsystem
 		rightEncoder.setDistancePerPulse(0.192); // cm/pulse => 20 pulses/rev x 8.75 gear on a 4" dia wheel
 		rightEncoder.setReverseDirection(false);
 		rightEncoder.setSamplesToAverage(10);
-		
-		//leftEncoder.setDistancePerPulse(leftDPP.get());
-		//rightEncoder.setDistancePerPulse(rightDPP.get());
 
 		LiveWindow.addSensor(this.getName(), "Left Encoder", leftEncoder);
 		LiveWindow.addSensor(this.getName(), "Right Encoder", rightEncoder);
@@ -78,17 +74,12 @@ public class DriveTrain extends Subsystem
 
 	public void drive(double leftSpeed, double rightSpeed)
 	{
-		if (leftDPP == null)
-		leftDPP = new DashboardVariable<Double>("LeftDPP", 0.197);
-		if (rightDPP == null)
-		rightDPP = new DashboardVariable<Double>("RightDPP", 0.192);
-		
 		leftEncoder.setDistancePerPulse(leftDPP.get());
 		rightEncoder.setDistancePerPulse(rightDPP.get());
-		
+
 		SmartDashboard.putNumber("Left Encoder", leftEncoder.get());
 		SmartDashboard.putNumber("Right Encoder", rightEncoder.get());
-		
+
 		SmartDashboard.putNumber("Left Encoder D", leftEncoder.getDistance());
 		SmartDashboard.putNumber("Right Encoder D", rightEncoder.getDistance());
 

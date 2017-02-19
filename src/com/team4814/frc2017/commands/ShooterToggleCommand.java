@@ -1,7 +1,7 @@
 package com.team4814.frc2017.commands;
 
 import com.team4814.frc2017.Robot;
-import com.team4814.frc2017.utils.DashboardVariable;
+import com.team4814.frc2017.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShooterToggleCommand extends Command
 {
 	private boolean toggle;
-	private static DashboardVariable<Double> shooterSpeed = new DashboardVariable<Double>("Shooter Speed", 1.0);
 
 	public ShooterToggleCommand(boolean toggle)
 	{
@@ -29,7 +28,7 @@ public class ShooterToggleCommand extends Command
 	{
 		if (toggle)
 		{
-			Robot.shooter.setSpeed(shooterSpeed.get());
+			Robot.shooter.setSpeed(Shooter.shooterSpeed.get());
 		}
 		else
 		{

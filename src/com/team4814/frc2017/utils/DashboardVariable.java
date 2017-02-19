@@ -1,10 +1,15 @@
 package com.team4814.frc2017.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DashboardVariable<T>
 {
+	private static List<DashboardVariable<?>> defaultVariables = new ArrayList<DashboardVariable<?>>();
+
 	protected String name;
 	protected T defaultValue;
 
@@ -13,7 +18,24 @@ public class DashboardVariable<T>
 		this.name = name;
 		this.defaultValue = defaultValue;
 
-		set(defaultValue);
+		defaultVariables.add(this);
+	}
+
+	/**
+	 * Make sure that variables declared early (as statics) get put on the SmartDashboard
+	 * (Attempting to put values before the Robot has initialized will throw exceptions)
+	 */
+	public static void initDefaultVariables()
+	{
+		for (int i = 0; i < defaultVariables.size(); i++)
+		{
+			defaultVariables.get(i).init();
+		}
+	}
+
+	public void init()
+	{
+		set(this.defaultValue);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -21,19 +43,19 @@ public class DashboardVariable<T>
 	{
 		try
 		{
-			if (Double.class.isInstance(defaultValue))
+			if (defaultValue instanceof Double)
 			{
 				return (T)(Object)SmartDashboard.getNumber(name, (Double)defaultValue);
 			}
-			else if (Integer.class.isInstance(defaultValue))
+			else if (defaultValue instanceof Integer)
 			{
 				return (T)(Object)SmartDashboard.getNumber(name, (Integer)defaultValue);
 			}
-			else if (Boolean.class.isInstance(defaultValue))
+			else if (defaultValue instanceof Boolean)
 			{
 				return (T)(Object)SmartDashboard.getBoolean(name, (Boolean)defaultValue);
 			}
-			else if (String.class.isInstance(defaultValue))
+			else if (defaultValue instanceof String)
 			{
 				return (T)(Object)SmartDashboard.getString(name, (String)defaultValue);
 			}
@@ -42,7 +64,7 @@ public class DashboardVariable<T>
 		{
 			DriverStation.reportError(e.getMessage(), true);
 		}
-		
+
 		return defaultValue;
 	}
 
@@ -50,19 +72,19 @@ public class DashboardVariable<T>
 	{
 		try
 		{
-			if (Double.class.isInstance(value))
+			if (defaultValue instanceof Double)
 			{
 				SmartDashboard.putNumber(name, (Double)value);
 			}
-			else if (Integer.class.isInstance(value))
+			else if (defaultValue instanceof Integer)
 			{
 				SmartDashboard.putNumber(name, (Integer)value);
 			}
-			else if (Boolean.class.isInstance(value))
+			else if (defaultValue instanceof Boolean)
 			{
 				SmartDashboard.putBoolean(name, (Boolean)value);
 			}
-			else if (String.class.isInstance(value))
+			else if (defaultValue instanceof String)
 			{
 				SmartDashboard.putString(name, (String)value);
 			}

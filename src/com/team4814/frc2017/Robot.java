@@ -12,6 +12,7 @@ import com.team4814.frc2017.subsystems.DriveTrain;
 import com.team4814.frc2017.subsystems.Hopper;
 import com.team4814.frc2017.subsystems.Intake;
 import com.team4814.frc2017.subsystems.Shooter;
+import com.team4814.frc2017.utils.DashboardVariable;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -47,6 +48,8 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
+		DashboardVariable.initDefaultVariables();
+
 		inputManager = new InputManager();
 
 		chooser.addDefault("Default Auto", new DoNothing());
