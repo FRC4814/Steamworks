@@ -1,7 +1,17 @@
 
 package com.team4814.frc2017;
 
-import com.team4814.frc2017.subsystems.*;
+import com.team4814.frc2017.autocommands.AutoGearA;
+import com.team4814.frc2017.autocommands.AutoGearB;
+import com.team4814.frc2017.autocommands.AutoGearC;
+import com.team4814.frc2017.autocommands.DoNothing;
+import com.team4814.frc2017.autocommands.GoForward;
+import com.team4814.frc2017.autocommands.JustShoot;
+import com.team4814.frc2017.subsystems.Climber;
+import com.team4814.frc2017.subsystems.DriveTrain;
+import com.team4814.frc2017.subsystems.Hopper;
+import com.team4814.frc2017.subsystems.Intake;
+import com.team4814.frc2017.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,8 +32,9 @@ public class Robot extends IterativeRobot
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Climber climber = new Climber();
 	public static final Shooter shooter = new Shooter();
+	public static final Hopper hopper = new Hopper();
 	public static final Intake intake = new Intake();
-	
+
 	public static InputManager inputManager;
 
 	Command autonomousCommand;
@@ -37,8 +48,14 @@ public class Robot extends IterativeRobot
 	public void robotInit()
 	{
 		inputManager = new InputManager();
-		// chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+
+		chooser.addDefault("Default Auto", new DoNothing());
+		chooser.addObject("Place Gear A", new AutoGearA());
+		chooser.addObject("Place Gear B", new AutoGearB());
+		chooser.addObject("Place Gear C", new AutoGearC());
+		chooser.addObject("Go Forward", new GoForward());
+		chooser.addObject("Just Shoot", new JustShoot());
+
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -73,16 +90,9 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit()
 	{
-		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-		
 		driveTrain.resetEncoders();
+
+		autonomousCommand = chooser.getSelected();
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
@@ -102,7 +112,7 @@ public class Robot extends IterativeRobot
 	public void teleopInit()
 	{
 		driveTrain.resetEncoders();
-		
+
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}

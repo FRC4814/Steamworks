@@ -14,6 +14,7 @@ public class RobotMap
 	public static final int SHOOTER_MOTOR = 0;
 	public static final int CLIMBER_MOTOR = 8;
 	public static final int INTAKE_MOTOR = 7;
+	public static final int HOPPER_MOTOR = 9;
 	
 	// USB
 	public static final int DRIVER_CONTROLLER = 1;

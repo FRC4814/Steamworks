@@ -4,26 +4,23 @@ import com.team4814.frc2017.RobotMap;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
  */
-public class Shooter extends Subsystem
+public class Hopper extends Subsystem
 {
 	protected VictorSP mainMotor;
 
-	public Shooter()
+	public Hopper()
 	{
-		mainMotor = new VictorSP(RobotMap.SHOOTER_MOTOR);
-		mainMotor.setInverted(true);
-		
-		LiveWindow.addSensor(this.getName(), "Shooter Motor", mainMotor);
+		mainMotor = new VictorSP(RobotMap.HOPPER_MOTOR);
 	}
 
 	public void initDefaultCommand()
 	{
-		// setDefaultCommand(new MySpecialCommand());
+
+		//setDefaultCommand(new HopperCommand());;
 	}
 
 	public void setSpeed(double speed)

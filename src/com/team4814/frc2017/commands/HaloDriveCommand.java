@@ -29,7 +29,7 @@ public class HaloDriveCommand extends Command
 		double turnMod = InputManager.driverController.getX(Hand.kRight);
 		double leftPower = forwardPower;
 		double rightPower = forwardPower;
-		
+
 		//System.out.println(forwardPower);
 
 		if (forwardPower < 0) // switches directions when moving backwards
@@ -43,8 +43,16 @@ public class HaloDriveCommand extends Command
 
 		if (forwardPower == 0) // if forward = 0, then zero point turn
 		{
-			leftPower = turnMod;
-			rightPower = -turnMod;
+			leftPower = turnMod * 0.6;
+			rightPower = -turnMod * 0.6;
+		}
+		else if (forwardPower > 0)
+		{
+			rightPower *= 1.15;
+		}
+		else
+		{
+			leftPower *= 1.15;
 		}
 
 		Robot.driveTrain.drive(leftPower, rightPower);

@@ -18,7 +18,6 @@ public class DriveStraight extends Command
 		requires(Robot.driveTrain);
 		targetDistance = distance;
 		mainSpeed = speed;
-
 	}
 
 	// Called just before this Command runs the first time
@@ -30,41 +29,71 @@ public class DriveStraight extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		double rightDistance = 0;
-		double leftDistance = 0;
+		double rightDistance = Robot.driveTrain.getRightDistance();
+		double leftDistance = Robot.driveTrain.getLeftDistance();
 		double leftSpeed = mainSpeed;
 		double rightSpeed = mainSpeed;
-		double per = 0;
-		rightDistance = Robot.driveTrain.getRightDistnace();
-		leftDistance = Robot.driveTrain.getLeftDistnace();
 
-		if ((rightDistance - 0.1 < leftDistance) && (leftDistance < rightDistance + 0.1))
+		if (mainSpeed > 0)
 		{
 
-		}
-		else if (rightDistance < leftDistance)
-		{
-			per = rightDistance / leftDistance;
+			if ((rightDistance - 0.1 < leftDistance) && (leftDistance < rightDistance + 0.1))
+			{
 
-			leftSpeed -= (1 - per);
+			}
+			else if (rightDistance < leftDistance)
+			{
+				double per = rightDistance / leftDistance;
+
+				rightSpeed *= 1 + per;
+			}
+			else
+			{
+				double per = leftDistance / rightDistance;
+
+				leftSpeed *= 1 + per;
+			}
 		}
 		else
 		{
-			per = leftDistance / rightDistance;
-			rightSpeed -= (1 - per);
+			if ((rightDistance - 0.1 < leftDistance) && (leftDistance < rightDistance + 0.1))
+			{
 
+			}
+			else if (rightDistance > leftDistance)
+			{
+				double per = leftDistance / rightDistance;
+
+				rightSpeed *= 1 + per;
+			}
+			else
+			{
+				double per = rightDistance / leftDistance;
+
+				leftSpeed *= 1 + per;
+			}
 		}
 
-		Robot.driveTrain.setLeftSpeed(leftSpeed);
-		Robot.driveTrain.setRightSpeed(rightSpeed);
+		Robot.driveTrain.drive(leftSpeed, rightSpeed);
+
+		System.out.println(leftSpeed + " " + rightSpeed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished()
 	{
-		if ((Robot.driveTrain.leftEncoder.getDistance() >= targetDistance)
-				|| (Robot.driveTrain.rightEncoder.getDistance() >= targetDistance))
-			return true;
+		if (mainSpeed > 0)
+		{
+			if ((Robot.driveTrain.leftEncoder.getDistance() >= targetDistance)
+					|| (Robot.driveTrain.rightEncoder.getDistance() >= targetDistance))
+				return true;
+		}
+		else
+		{
+			if ((Robot.driveTrain.leftEncoder.getDistance() <= targetDistance)
+					|| (Robot.driveTrain.rightEncoder.getDistance() <= targetDistance))
+				return true;
+		}
 		return false;
 	}
 
