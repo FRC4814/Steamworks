@@ -5,7 +5,7 @@ import com.team4814.frc2017.commands.HaloDriveCommand;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,9 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem
 {
-
-	protected Victor[] leftMotors;
-	protected Victor[] rightMotors;
+	protected VictorSP[] leftMotors;
+	protected VictorSP[] rightMotors;
 
 	public Encoder leftEncoder;
 	public Encoder rightEncoder;
@@ -25,16 +24,16 @@ public class DriveTrain extends Subsystem
 	public DriveTrain()
 	{
 
-		leftMotors = new Victor[RobotMap.LEFT_MOTORS.length];
+		leftMotors = new VictorSP[RobotMap.LEFT_MOTORS.length];
 		for (int i = 0; i < leftMotors.length; i++)
 		{
-			leftMotors[i] = new Victor(RobotMap.LEFT_MOTORS[i]);
+			leftMotors[i] = new VictorSP(RobotMap.LEFT_MOTORS[i]);
 		}
 
-		rightMotors = new Victor[RobotMap.RIGHT_MOTORS.length];
+		rightMotors = new VictorSP[RobotMap.RIGHT_MOTORS.length];
 		for (int i = 0; i < rightMotors.length; i++)
 		{
-			rightMotors[i] = new Victor(RobotMap.RIGHT_MOTORS[i]);
+			rightMotors[i] = new VictorSP(RobotMap.RIGHT_MOTORS[i]);
 			rightMotors[i].setInverted(true);
 		}
 
@@ -72,16 +71,11 @@ public class DriveTrain extends Subsystem
 
 	public void drive(double leftSpeed, double rightSpeed)
 	{
-		double rightDistance = 0;
-		double leftDistance = 0;
 		SmartDashboard.putNumber("Left Encoder", leftEncoder.get());
 		SmartDashboard.putNumber("Right Encoder", rightEncoder.get());
 
 		setLeftSpeed(leftSpeed);
 		setRightSpeed(rightSpeed);
-
-		rightDistance = getRightDistnace();
-		leftDistance = getLeftDistnace();
 	}
 
 	public void setLeftSpeed(double speed)

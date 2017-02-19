@@ -3,7 +3,7 @@ package com.team4814.frc2017.subsystems;
 import com.team4814.frc2017.RobotMap;
 import com.team4814.frc2017.commands.ClimbCommand;
 
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Climber extends Subsystem
 {
-	protected Victor mainMotor;
+	protected Talon mainMotor;
 	
 	public Climber()
 	{
-		mainMotor = new Victor(RobotMap.CLIMBER_MOTOR);
+		mainMotor = new Talon(RobotMap.CLIMBER_MOTOR);
 	}
 	
 	public void initDefaultCommand()
