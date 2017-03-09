@@ -1,7 +1,7 @@
 package com.team4814.frc2017.autocommands;
 
 import com.team4814.frc2017.Robot;
-import com.team4814.frc2017.utils.DashboardVariable;
+import com.team4814.frc2017.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,7 +12,7 @@ public class AutoShooter extends Command
 {
 
 	private boolean toggle;
-	private static DashboardVariable<Double> shooterSpeed = new DashboardVariable<Double>("Shooter Speed", 1.0);
+	//private static DashboardVariable<Double> shooterSpeed = new DashboardVariable<Double>("Shooter Speed", 1.0);
 
 	public AutoShooter(boolean on)
 	{
@@ -31,7 +31,7 @@ public class AutoShooter extends Command
 	protected void execute()
 	{
 		if (toggle)
-			Robot.shooter.setSpeed(shooterSpeed.get());
+			Robot.shooter.setSpeed(Shooter.shooterSpeed.get());
 		else
 			Robot.shooter.setSpeed(0.0);
 	}

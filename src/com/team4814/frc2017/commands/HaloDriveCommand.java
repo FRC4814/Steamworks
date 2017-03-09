@@ -25,8 +25,8 @@ public class HaloDriveCommand extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		double forwardPower = -InputManager.driverController.getY(Hand.kLeft);
-		double turnMod = InputManager.driverController.getX(Hand.kRight);
+		double forwardPower = Math.pow(-InputManager.driverController.getY(Hand.kLeft), 3);
+		double turnMod = Math.pow(InputManager.driverController.getX(Hand.kRight), 3);
 		double leftPower = forwardPower;
 		double rightPower = forwardPower;
 
@@ -43,8 +43,8 @@ public class HaloDriveCommand extends Command
 
 		if (forwardPower == 0) // if forward = 0, then zero point turn
 		{
-			leftPower = turnMod * 0.6;
-			rightPower = -turnMod * 0.6;
+			leftPower = turnMod;
+			rightPower = -turnMod;
 		}
 		else if (forwardPower > 0)
 		{

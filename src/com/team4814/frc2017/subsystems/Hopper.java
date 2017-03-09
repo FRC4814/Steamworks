@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Hopper extends Subsystem
 {
-	public static final DashboardVariable<Double> hopperSpeed = new DashboardVariable<>("Hopper Speed", 1.0);
+	public static final DashboardVariable<Double> hopperSpeed = new DashboardVariable<>("Hopper Speed", 0.28);
 
 	protected VictorSP mainMotor;
 

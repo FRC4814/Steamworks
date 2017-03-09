@@ -1,6 +1,7 @@
 package com.team4814.frc2017.commands;
 
 import com.team4814.frc2017.Robot;
+import com.team4814.frc2017.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,7 +28,7 @@ public class IntakeToggleCommand extends Command
 	{
 		if (toggle)
 		{
-			Robot.intake.setSpeed(1.0);
+			Robot.intake.setSpeed(Intake.intakeSpeed.get());
 		}
 		else
 		{

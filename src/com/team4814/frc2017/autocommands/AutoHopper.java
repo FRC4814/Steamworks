@@ -1,7 +1,7 @@
 package com.team4814.frc2017.autocommands;
 
 import com.team4814.frc2017.Robot;
-import com.team4814.frc2017.utils.DashboardVariable;
+import com.team4814.frc2017.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoHopper extends Command
 {
 	private double timeRun;
-	private static DashboardVariable<Double> hopperSpeed = new DashboardVariable<Double>("Hopper Speed", 1.0);
+	//private static DashboardVariable<Double> hopperSpeed = new DashboardVariable<Double>("Hopper Speed", 1.0);
 	private Timer timer;
 
 	public AutoHopper(double time)
@@ -31,7 +31,7 @@ public class AutoHopper extends Command
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
-		Robot.hopper.setSpeed(hopperSpeed.get());
+		Robot.hopper.setSpeed(Hopper.hopperSpeed.get());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
